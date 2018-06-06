@@ -1,0 +1,20 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "mes tests js",
+  "main": "array_test.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "lodash": "^4.17.10",
+    "node-fetch": "^2.1.2",
+    "path": "^0.12.7",
+    "rxjs": "^6.2.0",
+    "superagent": "^3.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": ""
+  },
+  "author": "Gary Johnson",
+  "license": "ISC"
+}
