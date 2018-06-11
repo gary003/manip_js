@@ -1,7 +1,10 @@
-const assert = require('assert')
-let numbers = [176,-12,6,16,122,199,9,55]
+const numbers = [176,-12,6,16,122,199,9,55]
 
-console.log(numbers.every((val) => val >= -9 ))
+const check = numbers.every((val) => val >= -9 )
+const subSum  = numbers.slice(2,5).reduce((acc,val) => acc + val , 0)
+
+console.log(check)
+console.log(subSum)
 
 const isRussian = (us) => us.country == 'ru'
 const isBrazilian = (us) => us.country == 'br'
