@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+const assert = require('assert')
+>>>>>>> 90aa306cbaa2ee3cfc7a02df4f21de0239aafb01
 const numbers = [176,-12,6,16,122,199,9,55]
 
 const check = numbers.every((val) => val >= -9 )
