@@ -9,9 +9,9 @@ const fetch_file = file => {
 }
 
 Promise.all([
-  ii = fetch_file('./manip_js/files/lorem.txt'),
-  tt = fetch_file('./manip_js/files/conf.json') ,
-  yy = fetch_file('./manip_js/files/ll.pdf'),
+  ii = fetch_file(__dirname+'/files/lorem.txt'),
+  tt = fetch_file(__dirname+'/files/conf.json') ,
+  yy = fetch_file(__dirname+'/files/ll.pdf'),
 ])
 //.then(c => c.json())
 .then(results => {
