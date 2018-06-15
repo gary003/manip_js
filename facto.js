@@ -1,8 +1,8 @@
 const rec = (x) => (x == 1)? 1 : x * rec(x-1)
 
 const hhf = (n) => Array.from(Array(n).keys())
-                        .map( x => x + 1)
-                        .reduce(( acc,x ) => (acc||1) * x)
+                        .map(x => x + 1)
+                        .reduce((acc,x) => acc * x , 1)
 
 const loop = (n) => {
   let acc = 1
