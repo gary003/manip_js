@@ -1,4 +1,5 @@
 const fs = require('fs')
+const _ = require ('lodash')
 
 const fetch_file = file => {
   return new Promise((res,rej) => {
@@ -8,14 +9,20 @@ const fetch_file = file => {
   })
 }
 
-Promise.all([
-  ii = fetch_file(__dirname+'/files/lorem.txt'),
-  tt = fetch_file(__dirname+'/files/conf.json') ,
-  yy = fetch_file(__dirname+'/files/ll.pdf'),
-])
-//.then(c => c.json())
-.then(results => {
-  //let conf = JSON.parse(results)
-  console.log('__',results)
-})
-.catch((c) => console.log('-catch-',c))
+const getResults = (...values) => {
+  values = _.flatten(values)
+  const f_files = values
+                      .map(file => fetch_file(__dirname+"/"+file))
+
+  return Promise.all(f_files)
+  //.then(c => c.json())
+  .then(results => {
+    //let conf = JSON.parse(results)
+    return results
+  })
+  .catch( err => {
+    return err
+  })
+}
+
+getResults("files/lorem.txt",'/files/conf.json').then( res => console.log(res))

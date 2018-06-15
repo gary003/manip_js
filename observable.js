@@ -1,6 +1,6 @@
 const rxjs = require('rxjs')
 
-let observableO = rxjs.Observable.create((observable) => {
+const observableO = rxjs.Observable.create((observable) => {
   setInterval(() => {
     ran = Math.random()
     if(ran > 0.95)
@@ -12,7 +12,7 @@ let observableO = rxjs.Observable.create((observable) => {
   },500)
 })
 
-let observer = observableO.subscribe({
+const observer = observableO.subscribe({
     next:(val) => console.log(val),
     error:(val) => {
       console.log(val)

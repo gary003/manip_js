@@ -1,7 +1,34 @@
-const assert = require('assert')
-let numbers = [176,-12,6,16,122,199,9,55]
+const numbers = [176,-12,6,16,122,199,9,55]
+const vals = ["176","-12","6",undefined,"16","122",null,"199","9","55",null,"1","16","-55"]
+const sentences = ["prix: 176","prix : 112"]
 
-console.log(numbers.every((val) => val >= -9 ))
+const check = numbers.every((val) => val >= -9 )
+const subSum  = numbers.slice(2,5).reduce((acc,val) => acc + val , 0)
+
+let result = sentences
+  .map(val => val.match(/prix *: *(\d+)/)[1])
+  .map(val => parseInt(val))
+  .reduce( (acc,val) => acc + val ,0 )
+
+console.log(typeof(result))
+
+console.log(
+  vals
+    .filter(val => ! [undefined,null].includes(val))
+    .map((val => parseInt(val)))
+    .slice(2,-2)
+    .filter((val) => val > 12)
+    .reduce((acc,val) => acc + val , 0)
+)
+
+console.log(Math.pow(2,6))
+console.log(Math.log(128)/Math.log(2))
+console.log(2**6)
+
+console.log(typeof(undefined))
+
+console.log(check)
+console.log(subSum)
 
 const isRussian = (us) => us.country == 'ru'
 const isBrazilian = (us) => us.country == 'br'

@@ -8,6 +8,4 @@ let str2  = "P3X4356 P3X3054 P3X3008 planet"
 //   matches.push(res)
 // }
 
-matches
-
 console.log(str.match(reg))
