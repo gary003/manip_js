@@ -1,3 +1,5 @@
+const _ = require('lodash')
+
 const numbers = [176,-12,6,16,122,199,9,55]
 const vals = ["176","-12","6",undefined,"16","122",null,"199","9","55",null,"1","16","-55"]
 const sentences = ["prix: 176","prix : 112"]
@@ -11,6 +13,13 @@ let result = sentences
   .reduce( (acc,val) => acc + val ,0 )
 
 console.log(typeof(result))
+
+const int_vals = vals.filter(val => ! [undefined,null].includes(val))
+                     .map( v => parseInt(v))
+
+
+const mean_vals = _.mean(int_vals)
+mean_vals
 
 console.log(
   vals
@@ -54,7 +63,6 @@ let countries = users
                   .filter((val,i,me) => me.indexOf(val) === i)
 
 console.log(kenianUsers)
-
 console.log(countriesUsers)
 console.log(countries)
 
