@@ -11,18 +11,11 @@ const fetch_file = file => {
 
 const getResults = (...values) => {
   values = _.flatten(values)
-  const f_files = values
-                      .map(file => fetch_file(__dirname+"/"+file))
+  const f_files = values.map(file => fetch_file(__dirname+"/"+file))
 
   return Promise.all(f_files)
-  //.then(c => c.json())
-  .then(results => {
-    //let conf = JSON.parse(results)
-    return results
-  })
-  .catch( err => {
-    return err
-  })
+                .then( results => results )
+                .catch( err => err )
 }
 
-getResults("files/lorem.txt",'/files/conf.json').then( res => console.log(res))
+getResults("files/lorem.txt",'files/conf.json').then( res => console.log(res))

@@ -11,10 +11,9 @@
     "rxjs": "^6.2.0",
     "superagent": "^3.8.3"
   },
-  "devDependencies": {},
   "scripts": {
     "test": ""
   },
   "author": "Gary Johnson",
-  "license": "ISC"
+  "license": "ISC",
 }
