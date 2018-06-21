@@ -6,7 +6,7 @@ const hhf = (n) => Array.from(Array(n).keys())
 
 const loop = (n) => {
   let acc = 1
-  for (var i = 1 ; i <= n ; i++)
+  for (let i = 1 ; i <= n ; i++)
     acc = i * acc
 
   return acc
