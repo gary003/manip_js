@@ -8,6 +8,7 @@
     "lodash": "^4.17.10",
     "node-fetch": "^2.1.2",
     "path": "^0.12.7",
+    "ramda": "^0.25.0",
     "rxjs": "^6.2.0",
     "superagent": "^3.8.3"
   },
@@ -15,5 +16,5 @@
     "test": ""
   },
   "author": "Gary Johnson",
-  "license": "ISC",
+  "license": "ISC"
 }
