@@ -2,15 +2,16 @@ const _ = require('lodash')
 
 tab = ["13",null,null,34,6,-54,undefined,'345',7,98]
 
-const maxi = _.chain(tab)
-              .filter((val) => ! [undefined,null].includes(val))
-              .map((val) => parseInt(val))
-              .slice(1,5)
-              .value()
+const maximum =
+       _.chain(tab)
+        .filter((val) => ! [undefined,null].includes(val))
+        .map((val) => parseInt(val))
+        .slice(1,5)
+        .value()
 
-maxi
+maximum
 
-const s = "azerty poiuytre ipsuuu teea cup pick up"
+const s = "azerty poiuytrre ipsuuu teea cup pick up"
 
 const maxOccurrence =  _.chain(s)
                         .split('')
@@ -19,23 +20,28 @@ const maxOccurrence =  _.chain(s)
 
 maxOccurrence
 
-const max_letter = Promise( resolve => {
-                    _.chain(s)
-                    .split('')
-                    .countBy()
-                    .pickBy((value,key) => value > 4 )
-                    .value()
-                  }
+const max_letter = () => {
+  return new Promise( (resolve,reject) => {
+    return resolve(
+            _(s)
+              .split('')
+              .countBy()
+              .thru( value => {
+                const maxi = _(value).chain().values().max().value()
+                return _.pickBy(value,(v,k) => v == maxi )
+              })
+              .value()
+    )
+  })
+}
 
-max_letter
+max_letter()
+  .then( val => console.log(val) )
+  .catch(err => console.log(err))
 
 const ob = {
-  'a':2,
-  'c':3,
-  'r':4,
-  'e':6,
-  'i':1,
-  'r':4,
+  'a':2,'c':3,'r':4,
+  'e':6,'i':1,'r':4,
   'e':4
 }
 
