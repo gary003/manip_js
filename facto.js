@@ -8,7 +8,7 @@ const hhf = (n) => R.range(2,n+1)
 
 const loop = (n) => {
   let acc = 1
-  for (var i = 1 ; i <= n ; i++)
+  for (let i = 1 ; i <= n ; i++)
     acc = i * acc
 
   return acc
