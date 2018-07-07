@@ -13,24 +13,13 @@ const subSum  = numbers.slice(2,5).reduce((acc,val) => acc + val , 0)
 let result = sentences
   .map(val => val.match(/prix *: *(\d+)/)[1])
   .map(val => parseInt(val))
-  .reduce( (acc,val) => acc + val ,0 )
-
-console.log(typeof(result))
+  .reduce( (acc,val) => acc + val , 0 )
 
 const int_vals = vals.filter(val => ! [undefined,null].includes(val))
                      .map( v => parseInt(v))
 
 const mean_vals = _.mean(int_vals)
 mean_vals
-
-// console.log(
-//   vals
-//     .filter(val => ! [undefined,null].includes(val))
-//     .map((val => parseInt(val)))
-//     .slice(2,-2)
-//     .filter((val) => val > 12)
-//     .reduce((acc,val) => acc + val , 0)
-// )
 
 const isRussian = (us) => us.country == 'ru'
 const isBrazilian = (us) => us.country == 'br'
@@ -43,13 +32,10 @@ const kenianUsers = users.filter(isKenian)
 let countriesUsers = users
                       .reduce((acc,val) => { acc.push(val.country) ; return acc },[])
                       .sort((a,b) => a[1] > b[1])
+
 let countries = users
                   .map(val => val.country)
                   .filter((val,i,me) => me.indexOf(val) === i)
-//
-// console.log(kenianUsers)
-// console.log(countriesUsers)
-// console.log(countries)
 
 const biggestName = users.reduce((a,b) => (a.firstname.length < b.firstname.length)? b : a ,users[0])
 
@@ -71,16 +57,12 @@ const sexes = users
 
 sexes
 
-const g = _(users)
-          .groupBy(us => [us.sex,us.group])
-          .mapValues((v,k) => v.map(c => c.lastname))
-          .value()
+const workGroup =  _.chain(users)
+                    .groupBy(us => [us.sex,us.group])
+                    .mapValues((v,k) => v.map(c => c.lastname))
+                    .value()
 
-g
-
-// console.log(
-//   group
-// )
+workGroup
 
 // for (var i = 0; i < 1000; i++) {
 //   Array.from(numbers).sort( (a,b) =>  b - a)[0] //?.
