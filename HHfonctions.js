@@ -50,7 +50,7 @@ const group = users
   },{})
 
 const sexes = users
-  // recuperation du sex --> ['f','m','f','f','m']
+  // recuperation du sex --> ['f','m','f','f','m','m']
   .map( us => us.sex )
   // uniq --> ['f','m']
   .filter( (sex,i,arr) => arr.indexOf(sex) == i)

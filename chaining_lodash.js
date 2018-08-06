@@ -1,7 +1,6 @@
 const _ = require('lodash')
 
 const tab = ["13",null,null,34,'-345',7,-98,6,-54,undefined,'345',7,98]
-
 const groupVanillaJS = tab
   .filter((val) => ! [undefined,null].includes(val))
   .map((val) => parseInt(val))
