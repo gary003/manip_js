@@ -13,4 +13,6 @@ const pushy = (...values) => {
 
 }
 
-pushy("JS","ruby","PHP","java","kotlin")
+pushy("JS","ruby","java","kotlin","golang","c++")
+
+_.times(3).forEach(i => console.log(i))

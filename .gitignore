@@ -1,1 +1,4 @@
 *node_modules*
+*package-lock.json*
+*./mailer_test/package-json.json*
+*./node_modules*
