@@ -1,0 +1,24 @@
+{
+  "name": "servertodotr",
+  "author": "Gary Johnson",
+  "description": "todo liste en temps reel exo openclassroom ",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "~4.15.3",
+    "socket.io": "~2.0",
+    "ejs": "~2.5.6",
+    "ip": "~1.1.5",
+    "ent": "~2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "Apache-2.0",
+  "main": "serverTodoTR.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodejs serverTodoTR.js"
+  }
+}
