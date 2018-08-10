@@ -37,25 +37,22 @@ const maxOccurrence = (letter) => {
 
 console.log(maxOccurrence("u"))
 
-const max_letter = () => {
-  return new Promise( (resolve,reject) => {
-    return resolve(
-     _.chain(s)
-      .split('')
-      .filter(x => x != ' ')
-      .countBy()
-      .thru( myself => {
-         const maxi = _(myself).chain().values().max().value()
-         return _.pickBy(myself,(v,k) => v == maxi )
-      })
-      .value()
-    )
+const max_letter = () => Promise.resolve(
+  _.chain(s)
+  .split('')
+  .filter(x => x != ' ')
+  .countBy()
+  .thru( myself => {
+     const maxi = _(myself).chain().values().max().value()
+     return _.pickBy(myself,(v,k) => v == maxi )
   })
-}
+  .value()
+)
+
 
 max_letter()
-  .then( val => console.log(val) )
-  .catch(err => console.log(err))
+.then(val => console.log(val))
+.catch(err => console.log(err))
 
 const ob = {
   'a':2,'c':11,'r':12,

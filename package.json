@@ -4,7 +4,9 @@
   "description": "mes tests js",
   "main": "array_test.js",
   "dependencies": {
+    "Faker": "^0.7.2",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "json-logic-js": "^1.2.2",
     "lodash": "^4.17.10",
     "node-fetch": "^2.1.2",
