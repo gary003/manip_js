@@ -9,6 +9,7 @@
     "faker": "^4.1.0",
     "json-logic-js": "^1.2.2",
     "lodash": "^4.17.10",
+    "log-update": "^2.3.0",
     "node-fetch": "^2.1.2",
     "path": "^0.12.7",
     "ramda": "^0.25.0",
