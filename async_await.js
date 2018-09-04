@@ -1,11 +1,13 @@
-const request = require('superagent');
+const axios = require('axios');
 
 const getty = async () => {
-  let res = await request.get('http://localhost:8888/findAll')
-  let users = JSON.parse(res.text)
-  return users
+  let res = await axios.get('http://localhost:8888/api/client/findAll')
+  return res.data
 }
 
-getty().then((users) => {
+getty()
+.then((users) => {
   console.log(users)
 })
+.catch(err => console.log(err))
+
