@@ -6,6 +6,8 @@ const tabs = [[[2,43,23,54,4]]]
 console.log(tabs)
 console.log(_.flattenDeep(tabs));
 
+console.log(process.platform);
+
 const firstname = faker.name.firstName()
 firstname
 

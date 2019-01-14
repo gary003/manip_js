@@ -49,7 +49,6 @@ const max_letter = () => Promise.resolve(
   .value()
 )
 
-
 max_letter()
 .then(val => console.log(val))
 .catch(err => console.log(err))
