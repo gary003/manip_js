@@ -23,9 +23,7 @@ const quadraP = async(x) => x * 4
 const compoP = (...arrP) => num => {
   return arrP.reduce( (accP , currentp) => {
     return accP.then( passedRes => {
-      return currentp(passedRes).then( res => {
-        return res
-      })
+      return currentp(passedRes).then(res => res)
     })
   },Promise.resolve(num))
 }
