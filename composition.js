@@ -1,4 +1,3 @@
-
 // composition function basic
 const double = x => x + x
 const triple = x => x * 3
@@ -22,9 +21,11 @@ const tripleP = async(x) => x * 3
 const quadraP = async(x) => x * 4
 
 const compoP = (...arrP) => num => {
-  return arrP.reduce( (promiseArr , currentp) => {
-    return promiseArr.then( passedRes => {
-      return currentp(passedRes).then( res => res)
+  return arrP.reduce( (accP , currentp) => {
+    return accP.then( passedRes => {
+      return currentp(passedRes).then( res => {
+        return res
+      })
     })
   },Promise.resolve(num))
 }
@@ -35,6 +36,9 @@ const mul12P = compoP(tripleP,quadraP)
 mul6P(2).then( res => {
   console.log(res)
 })
+
 mul12P(2).then( res => {
   console.log(res)
 })
+
+console.log( quadraP() )
