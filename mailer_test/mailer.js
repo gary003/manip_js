@@ -14,9 +14,10 @@ app.use(bodyParser.urlencoded({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-const conf = fs.readFileSync('./conf.json', 'utf8')
+const conf = fs.readFileSync(path.join(__dirname,"conf.json") , 'utf8')
 const config = JSON.parse(conf)
 
+// Dont forget to set your mail accout to allow 'less secured apps' to connect 
 let transporter = nodemailer.createTransport({
   service: config.service_mail,
   auth: {
@@ -25,9 +26,7 @@ let transporter = nodemailer.createTransport({
   }
 })
 
-app.get('/', (req, res) => {
-  res.render('home')
-})
+app.get('/', (req, res) => res.status(200).render('home'))
 
 app.post('/send', (req, res) => {
 
@@ -39,11 +38,13 @@ app.post('/send', (req, res) => {
     html: req.body.message
   };
 
-  transporter.sendMail(mailOptions, function(err, response) {
-    !!err ? console.error(err) : res.redirect('/');
+  return transporter.sendMail(mailOptions,(err, response) => {
+    if(!!err){
+      console.error(err)
+      return res.status(500).redirect('/');
+    }
+    return res.status(200).redirect('/');
   });
-
-  res.redirect('/')
 })
 
 app.listen(8080, (err) => {
