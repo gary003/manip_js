@@ -39,9 +39,9 @@ app.post('/send', (req, res) => {
   return transporter.sendMail(mailOptions,(err, response) => {
     if(!!err){
       console.error(err)
-      return res.status(500).redirect('/');
+      return res.status(500).redirect('/')
     }
-    return res.status(200).redirect('/');
+    return res.status(200).redirect('/')
   })
 })
 
