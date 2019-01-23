@@ -20,11 +20,19 @@ const doubleP = async(x) => x + x
 const tripleP = async(x) => x * 3
 const quadraP = async(x) => x * 4
 
+// const compoP = (...arrP) => num => {
+//   return arrP.reduce( (accP , currentp) => {
+//     return accP.then( passedRes => {
+//       return currentp(passedRes).then(res => res)
+//     })
+//   },Promise.resolve(num))
+// }
+
 const compoP = (...arrP) => num => {
-  return arrP.reduce( (accP , currentp) => {
-    return accP.then( passedRes => {
-      return currentp(passedRes).then(res => res)
-    })
+  return arrP.reduce( async (accP , currentp) => {
+    const passedRes = await accP
+    const res = await currentp(passedRes)
+    return res
   },Promise.resolve(num))
 }
 
