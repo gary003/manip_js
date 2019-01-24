@@ -9,7 +9,6 @@ const compo = (...functions) => input => {
   } , input)
 }
 
-
 const mul12 = compo(quadra , triple)
 const mul18 = compo(double , triple , triple)
 
