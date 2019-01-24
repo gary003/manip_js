@@ -9,7 +9,7 @@ const compo = (...functions) => input => {
   } , input)
 }
 
-const mul6 = compo(double , triple)
+const mul6  = compo(double , triple)
 const mul18 = compo(double , triple , triple)
 
 console.log(mul6(12))
@@ -20,31 +20,18 @@ const doubleP = async(x) => x + x
 const tripleP = async(x) => x * 3
 const quadraP = async(x) => x * 4
 
-// const compoP = (...arrP) => num => {
-//   return arrP.reduce( (accP , currentp) => {
-//     return accP.then( passedRes => {
-//       return currentp(passedRes).then(res => res)
-//     })
-//   },Promise.resolve(num))
-// }
-
 const compoP = (...arrP) => num => {
   return arrP.reduce( async (accP , currentp) => {
     const passedRes = await accP
-    const res = await currentp(passedRes)
-    return res
+    return await currentp(passedRes)
   },Promise.resolve(num))
 }
 
-const mul6P = compoP(doubleP,tripleP)
+const mul6P  = compoP(doubleP,tripleP)
 const mul12P = compoP(tripleP,quadraP)
+const mul24P = compoP(doubleP,tripleP,quadraP)
 
-mul6P(2).then( res => {
+Promise.all([mul6P(5),mul12P(3),mul24P(2)])
+.then( res => {
   console.log(res)
 })
-
-mul12P(2).then( res => {
-  console.log(res)
-})
-
-console.log( quadraP() )
