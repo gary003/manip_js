@@ -9,10 +9,10 @@ const compo = (...functions) => input => {
   } , input)
 }
 
-const mul6  = compo(double , triple)
+const mul12 = compo(quadra , triple)
 const mul18 = compo(double , triple , triple)
 
-console.log(mul6(12))
+console.log(mul12(4))
 console.log(mul18(5))
 
 // composition Promise
