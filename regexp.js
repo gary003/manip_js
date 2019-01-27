@@ -4,13 +4,13 @@ let reg_range = /range/g
 
 let matches = []
 
-// let str   = "Bienvenue sur P3543272 , P354368"
-// let str2  = "P3X4356 P3X3054 P3X3008 planet"
-// let str3  = "123827363335242"
+let str   = "Bienvenue sur P3543272 , P354368"
+let str2  = "P3X4356 P3X3054 P3X3008 planet"
+let str3  = "123827363335242"
 
-// while(res = reg.exec(str2)){
-//   matches.push(res)
-// }
+while(res = reg.exec(str2)){
+  matches.push(res)
+}
 
-const ll = str3.match(reg3)
+const ll = str.match(reg)
 console.log(ll)
