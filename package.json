@@ -14,7 +14,7 @@
     "log-update": "^2.3.0",
     "node-fetch": "^2.1.2",
     "path": "^0.12.7",
-    "ramda": "^0.25.0",
+    "ramda": "^0.26.1",
     "rxjs": "^6.2.0",
     "superagent": "^3.8.3"
   },

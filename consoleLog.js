@@ -7,6 +7,6 @@ const tab = [
 // log avec nom de la variable
 console.log({tab});
 
-// timer 
+// timer
 console.time("timerTest")
 setTimeout(() => console.timeEnd("timerTest") , 2500)

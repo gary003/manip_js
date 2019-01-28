@@ -35,3 +35,15 @@ Promise.all([mul6P(5),mul12P(3),mul24P(2)])
 .then( res => {
   console.log(res)
 })
+
+// composition avec ramda !! a la version 0.26.x ; ce n'est pas au point
+// const R = require('ramda')
+// const mul8P =  R.composeP(doubleP ,quadraP)
+// const mul8 =  R.compose(double ,quadra)
+//
+// mul8P(3).then( x => {
+//   console.log(x);
+// })
+//
+// console.log(mul8P(3));
+// console.log(mul8(2))
