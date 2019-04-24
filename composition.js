@@ -20,10 +20,13 @@ const doubleP = async(x) => x + x
 const tripleP = async(x) => x * 3
 const quadraP = async(x) => x * 4
 
-const compoP = (...arrP) => num => {
-  return arrP.reduce( async (accP , currentp) => {
-    const passedRes = await accP
-    return await currentp(passedRes)
+const compoP = (...arrFunctions) => num => {
+  return arrFunctions.reduce( async (accP , currentp) => {
+    let errH = null
+    const passedPromiseRes = await accP.catch(err => errH = err)
+    if(!!errH) return Promise.reject(errH)
+    const resF = await currentp(passedPromiseRes).catch(err => errH = err)
+    return !!errH ? Promise.reject(errH) : Promise.resolve(resF)
   },Promise.resolve(num))
 }
 
@@ -32,9 +35,8 @@ const mul12P = compoP(tripleP,quadraP)
 const mul24P = compoP(doubleP,tripleP,quadraP)
 
 Promise.all([mul6P(5),mul12P(3),mul24P(2)])
-.then( res => {
-  console.log(res)
-})
+.then(console.log)
+.catch(console.log);
 
 // composition avec ramda !! a la version 0.26.x ; ce n'est pas au point
 // const R = require('ramda')

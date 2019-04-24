@@ -17,7 +17,6 @@ let result = sentences
 
 const int_vals = vals.filter(val => ! [undefined,null].includes(val))
                      .map( v => parseInt(v))
-
 const mean_vals = _.mean(int_vals)
 mean_vals
 

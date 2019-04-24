@@ -7,6 +7,12 @@ const tab = [
 // log avec nom de la variable
 console.log({tab});
 
-// timer
-console.time("timerTest")
-setTimeout(() => console.timeEnd("timerTest") , 2500)
+// // timer
+// console.time("timerTest")
+// setTimeout(() => console.timeEnd("timerTest") , 2500)
+
+// const io = require('console-read-write')
+// io.read().then((val) => {
+//   // const val = readline()
+//   console.log(typeof val);
+// })
