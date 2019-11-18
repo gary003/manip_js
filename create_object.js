@@ -31,7 +31,7 @@ for (var i = 0; i < 100000; i++) {
 
 const m = magician(95,124)
 // Object.getPrototypeOf(m)
-m.salutation()
+m.salutation() 
 m.setPower(23)
 m.getPower()
 m.getAge()
@@ -41,3 +41,4 @@ const p = person(65)
 p.salutation()
 p.setAge(45)
 p.getAge()
+  

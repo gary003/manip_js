@@ -16,7 +16,16 @@ const loop = (n) => {
 
 const rec_ter = (x , tot = 1) => (x < 2)? tot : rec_ter(x-1 , tot * x )
 
+const rec_gen = function*(num,res = 1){
+  while (num > 0){
+    yield res
+    res *= num
+    num -= 1
+  }
+}
+
 module.exports.rec = rec
 module.exports.hhf = hhf
 module.exports.loop = loop
 module.exports.rec_ter = rec_ter
+module.exports.rec_gen = rec_gen
