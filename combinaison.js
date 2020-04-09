@@ -1,6 +1,3 @@
-const { parse } = require("path")
-const { map } = require("bluebird")
-
 const changeRec = (amount, coins, change = [], res = []) => {
   let [coin, ...rest] = coins
   
@@ -9,27 +6,13 @@ const changeRec = (amount, coins, change = [], res = []) => {
   
   changeRec(amount - coin, coins, change.concat([coin]),res) 
   changeRec(amount, rest, change,res)
-
+  
   return res
 }
 
-const countChangeLoop = (money, coins) => {
-  const arr = new Array(money+1).fill(0);
-  arr[0]=1;
-  for(let iCoin=0;iCoin<arr.length;iCoin++)
-    for(let iMoney=coins[iCoin];iMoney<=money;iMoney++)
-      arr[iMoney]+=arr[iMoney-coins[iCoin]];
-
-  return arr[money]
-}
-
-const change2Loop = (money, coins) => {
-  const arr = new Array(money+1).fill(0);
-  arr[0]=[[null]];
+const change2Loop = (money, coins, arr = [[[null]]].concat(Array(money+1).fill([]))) => {
   for(let iCoin=0;iCoin<arr.length;iCoin++)
     for(let iMoney=coins[iCoin];iMoney<=money;iMoney++){
-      // If the array is not initialize , we create it
-      if(!arr[iMoney]) arr[iMoney] = new Array()
       // this variable contains the new change for the current iMoney
       let newChg = (arr[iMoney-coins[iCoin]] || [])
       /* we check the change value for the current chane + the coin 
@@ -43,12 +26,10 @@ const change2Loop = (money, coins) => {
   return arr[money]
 }
 
-const changeRecTer = (money, coins , indexCoin = 0, indexMoney = coins[0], result = [[[null]]].concat(Array(money)) ) => {
+const changeRecTer = (money, coins , indexCoin = 0, indexMoney = coins[0], result = [[[null]]].concat(Array(money).fill([]))) => {
   //Here , all the combination have been done we return the result(end of reccursion)
   if(indexCoin == coins.length) return result[money]
   // If the array is not initialize , we create it
-  if(!result[indexMoney]) result[indexMoney] = new Array()
-  // this variable contains the new change for the current indexMoney
   let newChg = (result[indexMoney-coins[indexCoin]] || [])
   /* we check the change value for the current chane + the coin 
   and update the result (for each change previously calculated)
@@ -67,5 +48,14 @@ const changeRecTer = (money, coins , indexCoin = 0, indexMoney = coins[0], resul
   
   return changeRecTer(money, coins , indexCoin , indexMoney, result)
 }
-// changeRecTer(16,[2,8])
-console.log(change2Loop(703,[2,5,7]))
+
+const changeHF = (money, coins , change = [] ,res = []) => {
+  if (money === 0) return res.push(change)
+  if (money < 0 )  return 0
+  coins.reduce((a,c,i) => a + changeHF(money - c, coins.slice(i) , change.concat(c) , res), 0)
+  return res
+}
+
+console.time('r');
+changeRec(1850,[2,4,5])
+console.timeEnd('r');
