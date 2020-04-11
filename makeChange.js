@@ -10,20 +10,20 @@ const changeRec = (amount, coins, change = [], res = []) => {
   return res
 }
 
-const change2Loop = (money, coins, arr = [[[null]]].concat(Array(money+1).fill([]))) => {
-  for(let iCoin=0;iCoin<arr.length;iCoin++)
+const change2Loop = (money, coins, res = [[[null]]].concat(Array(money).fill([]))) => {
+  for(let iCoin=0;iCoin<res.length;iCoin++)
     for(let iMoney=coins[iCoin];iMoney<=money;iMoney++){
       // this variable contains the new change for the current iMoney
-      let newChg = (arr[iMoney-coins[iCoin]] || [])
+      let newChg = (res[iMoney-coins[iCoin]])
       /* we check the change value for the current chane + the coin 
-      and update the arr (for each change previously calculated)
-      We filter the original null value from the parameter(first value of arr) */
+      and update the res (for each change previously calculated)
+      We filter the original null value from the parameter(first value of res) */
       newChg = newChg.map(x => x.concat(coins[iCoin])).map(x => x.filter(xx => !!xx))
-      // We add the new change to the arr
-      arr[iMoney] = arr[iMoney].concat([...newChg])
+      // We add the new change to the res
+      res[iMoney] = res[iMoney].concat(newChg)
     }
 
-  return arr[money]
+  return res
 }
 
 const changeRecTer = (money, coins , indexCoin = 0, indexMoney = coins[0], result = [[[null]]].concat(Array(money).fill([]))) => {
@@ -57,5 +57,5 @@ const changeHF = (money, coins , change = [] ,res = []) => {
 }
 
 console.time('r');
-changeRec(1850,[2,4,5])
+console.log(change2Loop(15,[2,5]))
 console.timeEnd('r');
