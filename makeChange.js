@@ -56,6 +56,17 @@ const changeHF = (money, coins , change = [] ,res = []) => {
   return res
 }
 
+let countWaysToCount = (num,count = 1, memoize = {}) => {
+  if(num < 0) return 0
+  if(`${num},${count}` in memoize) return memoize[`${num},${count}`]
+  if(num == 0) return 1
+  if(count > num) return 0
+  
+  memoize[`${num},${count}`] = countWaysToCount(num ,count+1,memoize) + countWaysToCount(num-count,count,memoize)
+  
+  return memoize[`${num},${count}`]
+}
+
 console.time('r');
-console.log(change2Loop(15,[2,5]))
+console.log(countWaysToCount(2000))
 console.timeEnd('r');
