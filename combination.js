@@ -39,7 +39,7 @@ function* iCombinations1rec(arr, k,change = Array.from(arr)){
 console.time('e')
 const comb = combinations(['♠A','♠2','♠K','♠8','♠5','♠Q','♠9'])
 // const s = [...comb]
-// console.log(comb);
+console.log(comb);
 // console.log(s);
 
 console.timeEnd('e')
