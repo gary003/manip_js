@@ -1,8 +1,8 @@
 const changeRec = (amount, coins, change = [], res = []) => {
   let [coin, ...rest] = coins
   
-  if(coin == undefined || amount <  0) return 0
-  if(amount == 0)                      return res.push(change)
+  if (!coin || amount <  0) return 0
+  if (amount == 0)          return res.push(change)
   
   changeRec(amount - coin, coins, change.concat([coin]),res) 
   changeRec(amount, rest, change,res)
