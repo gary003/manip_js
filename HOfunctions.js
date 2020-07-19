@@ -30,7 +30,7 @@ const kenianUsers = users.filter(isKenian)
 
 let countriesUsers = users
                       .reduce((acc,val) => { acc.push(val.country) ; return acc },[])
-                      .sort((a,b) => a[1] > b[1])
+                      .sort((a,b) => b.localeCompare(a))
 
 let countries = users
                   .map(val => val.country)
