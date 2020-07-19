@@ -6,7 +6,7 @@ const combinations = (cards, hand = [], allHands = [], shift = false) => {
   if(shift) allHands.push(hand)
 
   if(hand.filter(x => x == card).length < cards.filter(x => x == card).length)
-    combinations(cards, hand.concat([card]),allHands , true) 
+    combinations(cards, hand.concat([card]),allHands , true)
   
   combinations(rest, hand, allHands,false)
   
@@ -37,7 +37,7 @@ function* iCombinations1rec(arr, k,change = Array.from(arr)){
 }
 
 console.time('e')
-const comb = combinations(['♠A','♠2','♠K','♠8','♠5','♠Q','♠9'])
+const comb = combinations(['♣A','♦2','♥K','♠Q','♠9'])
 // const s = [...comb]
 console.log(comb);
 // console.log(s);

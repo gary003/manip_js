@@ -1,8 +1,9 @@
-const changeRec = (amount, coins, change = [], res = []) => {
+const changeRec = (amount, coins, change = [], res = []) => {  
   let [coin, ...rest] = coins
   
-  if (!coin || amount <  0) return 0
-  if (amount == 0)          return res.push(change)
+  if([undefined,null].includes(coin))  return 0
+  if(amount <  0)                      return 0
+  if(amount == 0)                      return res.push(change)
   
   changeRec(amount - coin, coins, change.concat([coin]),res) 
   changeRec(amount, rest, change,res)
@@ -76,8 +77,8 @@ const fib = (n,memoize = {}) => {
   return memoize[`${n}`]
 }
 
-console.log(fib(12903));
 
-// console.time('r');
+console.time('r')
+console.log(changeRec(1600,[60,40,70,120]))
 // console.log(countWaysToCount(5))
-// console.timeEnd('r');
+console.timeEnd('r')
