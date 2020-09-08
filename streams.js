@@ -2,16 +2,16 @@
 // ------   since nodeJS v14   --------- 
 // -------------------------------------
 
-/* !!!!! spawn uses streams and no shell (good security,
+/* !!!!! spawn uses streams and no shell (good security),
    while exec uses a buffer , a shell and a lot of memory */
 const { spawn } = require('child_process');
 const { pipeline} = require('stream')
 
 const options = ['./files/lorem.txt' ,'./files/lorem2.txt']
-const less = spawn('less', options)
+const less = spawn('less', options) 
 
 /* beware , the key word 'yield' must be in a 'for of' loop 
-   not a '.forEach(() => ..) */
+   not a '.forEach(() => ...)' */
 const transform = async function * (source) {
   for await(const val of source){
     const vv = val.toString('utf8').split(' ')
