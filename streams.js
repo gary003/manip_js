@@ -5,7 +5,7 @@
 /* !!!!! spawn uses streams and no shell (good security),
    while exec uses a buffer , a shell and a lot of memory */
 const { spawn } = require('child_process');
-const { pipeline} = require('stream')
+const { pipeline } = require('stream')
 
 const options = ['./files/lorem.txt' ,'./files/lorem2.txt']
 const less = spawn('less', options) 
