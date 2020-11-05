@@ -68,16 +68,6 @@ let countWaysToCount = (num,count = 1, memoize = {}) => {
   return memoize[`${num},${count}`]
 }
 
-const fib = (n,memoize = {}) => {
-  if(`${n}` in memoize) return memoize[`${n}`]
-  if(n == 0) return memoize[0n] = 0n
-  if(n == 1) return memoize[1n] = 1n
-  
-  memoize[`${n}`] = fib(n-1,memoize) + fib(n-2,memoize)
-  return memoize[`${n}`]
-}
-
-
 console.time('r')
 console.log(changeRec(1600,[60,40,70,120]))
 // console.log(countWaysToCount(5))
