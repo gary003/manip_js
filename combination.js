@@ -15,7 +15,7 @@ const combinations = (cards, hand = [], allHands = [], shift = false) => {
 
 function* iCombinations2rec(coins,change = [], shift = false){
   if (coins.length == 0) return null
-
+  
   const [coin, ...rest] = coins  
   
   if(shift) yield change
@@ -39,7 +39,7 @@ function* iCombinations1rec(arr, k,change = Array.from(arr)){
 console.time('e')
 const comb = combinations(['♣A','♦2','♥K','♠Q','♠9'])
 // const s = [...comb]
-console.log(comb);
-// console.log(s);
+console.log(comb)
+// console.log(s)
 
 console.timeEnd('e')
