@@ -1,0 +1,67 @@
+{
+  "swagger": "2.0",
+  "host": "localhost:8888",
+  "basePath": "/api",
+  "info": {
+    "title": "A getting started API.",
+    "version": "1.0.0"
+  },
+  "schemes": [ "http" ],
+  "definitions": {
+    "World": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of this world.",
+          "type": "string"
+        }
+      },
+      "required": ["name"]
+    }
+  },
+  "paths": {
+    "/home": {
+      "get" : {
+        "tags" : [ "Home" ],
+        "summary": "Represents a user",
+        "description": "Main endpoint.",
+        "responses": {
+          "200": {
+            "description": "Successful "
+          }
+        }
+      }
+    },
+    "/books": {
+      "get" : {
+        "tags" : [ "Books" ],
+        "summary": "Get all books",
+        "description": "Return a list of all books.",
+        "responses": {
+          "200": {
+            "description": "Successful get"
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "delete" : {
+        "tags" : [ "Books" ],
+        "summary": "Delete a book",
+        "description": "Given an id , the selected book is deleted",
+        "parameters" : [{
+          "name" : "id",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "Id of a book"
+        }],
+        "responses": {
+          "200": {
+            "description": "Successful deletion"
+          }
+        }
+      }
+    }
+  }
+}
