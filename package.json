@@ -6,7 +6,7 @@
   "dependencies": {
     "Faker": "^0.7.2",
     "async": "^3.1.0",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "bluebird": "^3.5.1",
     "console-read-write": "^0.1.1",
     "express": "^4.16.3",
@@ -16,7 +16,7 @@
     "log-update": "^2.3.0",
     "matrix-js": "^1.5.1",
     "memoizee": "^0.4.14",
-    "node-fetch": "^2.1.2",
+    "node-fetch": "^2.6.1",
     "path": "^0.12.7",
     "promisify": "0.0.3",
     "ramda": "^0.26.1",
