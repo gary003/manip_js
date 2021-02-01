@@ -20,7 +20,7 @@ const transform = async function * (source) {
   }
 }
 
-/* !! to use an async function as a transform stream ,
+/* !! to use an async function as a transform (made with a generator) stream ,
    you must use 'pipeline' not 'pipe' */
 pipeline(
   less.stdout,
@@ -28,6 +28,19 @@ pipeline(
   process.stdout,
   (err) => console.error(err)
 )
+
+// ------------------------------------------
+//  -----   from transform(Stream)   ---------
+// ------------------------------------------
+const { pipeline, Transform } = require('stream')
+
+// You can't use the ES6 syntaxe because of the keyword 'this'
+const transformStream = null
+
+const readS  = fs.createReadStream('./files/lorem.txt')
+const writeS = fs.createWriteStream('./files/lolorem.txt')
+
+readS.pipe(transformStream).pipe(writeS)
 
 
 // ----------------------------
