@@ -12,10 +12,13 @@ const changeRec = (amount, coins, change = [], res = []) => {
 }
 
 const change2Loop = (money, coins, res = [[[null]]].concat(Array(money).fill([]))) => {
-  for(let iCoin=0;iCoin<res.length;iCoin++)
+  for(let iCoin=0;iCoin<coins.length;iCoin++)
     for(let iMoney=coins[iCoin];iMoney<=money;iMoney++){
+      //console.log(iMoney);
       // this variable contains the new change for the current iMoney
       let newChg = (res[iMoney-coins[iCoin]])
+      //console.log(res);
+
       /* we check the change value for the current change + the coin 
       and update the res (for each change previously calculated)
       We filter the original null value from the parameter(first value of res) */
@@ -53,7 +56,7 @@ const changeRecTer = (money, coins , indexCoin = 0, indexMoney = coins[0], resul
 const changeHF = (money, coins , change = [] ,res = []) => {
   if (money === 0) return res.push(change)
   if (money < 0 )  return 0
-  coins.reduce((a,c,i) => changeHF(money - c, coins.slice(i) , change.concat(c) , res))
+  coins.reduce((a,c,i) => changeHF(money - c, coins.slice(i) , change.concat(c) , res),0)
   return res
 }
 
@@ -69,6 +72,7 @@ const countWaysToCount = (num,count = 1, memoize = {}) => {
 }
 
 console.time('r')
-console.log(changeHF(360,[60,40,70,120]))
+console.log(changeRec(100,[8,15,12]))
 // console.log(countWaysToCount(5))
 console.timeEnd('r')
+
