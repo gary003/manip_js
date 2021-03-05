@@ -7,7 +7,7 @@
 const { spawn } = require('child_process');
 const { pipeline } = require('stream')
 
-const options = ['./files/lorem.txt' ,'./files/lorem2.txt']
+const options = ['./files/lorem.txt' ]
 const less = spawn('less', options) 
 
 /* beware , the key word 'yield' must be in a 'for of' loop 
@@ -29,25 +29,10 @@ pipeline(
   (err) => console.error(err)
 )
 
-// ------------------------------------------
-//  -----   from transform(Stream)   ---------
-// ------------------------------------------
-const { pipeline, Transform } = require('stream')
-
-// You can't use the ES6 syntaxe because of the keyword 'this'
-const transformStream = null
-
-const readS  = fs.createReadStream('./files/lorem.txt')
-const writeS = fs.createWriteStream('./files/lolorem.txt')
-
-readS.pipe(transformStream).pipe(writeS)
-
-
 // ----------------------------
 //  -----   old way   ---------
 // ----------------------------
 const through = require('through2')
-const fs = require('fs')
 
 // You can't use the ES6 syntaxe because of the keyword 'this'
 const transformStream = through(function(chunk,encoding,next) {
@@ -55,7 +40,41 @@ const transformStream = through(function(chunk,encoding,next) {
   next()
 })
 
-const readS  = fs.createReadStream('./files/lorem.txt')
-const writeS = fs.createWriteStream('./files/lolorem.txt')
+const readS  = fs.createReadStream('/home/gary/devs/dev_manips/files/lorem.txt')
+const writeS = fs.createWriteStream('/home/gary/devs/dev_manips/files/lolorem.txt')
 
 readS.pipe(transformStream).pipe(writeS)
+
+
+// --------------------------------------------------
+//  -----   from transform(Raw,basic way)   ---------
+// --------------------------------------------------
+const { Transform } = require('stream')
+const fs = require('fs')
+const util = require('util')
+
+function Upper(options) {
+  // allow use without new
+  if (!(this instanceof Upper)) {
+    return new Upper(options);
+  }
+
+  // init Transform
+  Transform.call(this, options);
+}
+
+Upper.prototype._transform = function (chunk, enc, callback) {
+  // console.log(chunk.toString().toUpperCase())
+  const newChunk = chunk.toString().toUpperCase()
+  this.push(newChunk)
+  return callback()
+}
+
+util.inherits(Upper, Transform);
+
+// try it out
+const upper = new Upper()
+upper.pipe(process.stdout); // output to stdout
+upper.write('hello world\n'); // input line 1
+upper.write('another line');  // input line 2
+upper.end();  // finish

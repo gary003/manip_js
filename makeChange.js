@@ -14,10 +14,10 @@ const changeRec = (amount, coins, change = [], res = []) => {
 const change2Loop = (money, coins, res = [[[null]]].concat(Array(money).fill([]))) => {
   for(let iCoin=0;iCoin<coins.length;iCoin++)
     for(let iMoney=coins[iCoin];iMoney<=money;iMoney++){
-      //console.log(iMoney);
+      //console.log(iMoney)
       // this variable contains the new change for the current iMoney
       let newChg = (res[iMoney-coins[iCoin]])
-      //console.log(res);
+      //console.log(res)
 
       /* we check the change value for the current change + the coin 
       and update the res (for each change previously calculated)
@@ -31,7 +31,7 @@ const change2Loop = (money, coins, res = [[[null]]].concat(Array(money).fill([])
 }
 
 const changeRecTer = (money, coins , indexCoin = 0, indexMoney = coins[0], result = [[[null]]].concat(Array(money).fill([]))) => {
-  //Here , all the combination have been done we return the result(end of reccursion)
+  //Here , all the combination have been done we return the result(end of recursion)
   if(indexCoin == coins.length) return result[money]
   // If the array is not initialize , we create it
   let newChg = (result[indexMoney-coins[indexCoin]] || [])
@@ -41,7 +41,7 @@ const changeRecTer = (money, coins , indexCoin = 0, indexMoney = coins[0], resul
   newChg = newChg.map(x => x.concat(coins[indexCoin])).map(x => x.filter(xx => !!xx))
   // We add the new change to the result
   result[indexMoney] = result[indexMoney].concat([...newChg])    
-  // We handle the indexes for the reccursion
+  // We handle the indexes for the recursion
   if(indexMoney == money && indexCoin < coins.length) {
     indexCoin += 1
     indexMoney = coins[indexCoin]
@@ -72,7 +72,6 @@ const countWaysToCount = (num,count = 1, memoize = {}) => {
 }
 
 console.time('r')
-console.log(changeRec(100,[8,15,12]))
-// console.log(countWaysToCount(5))
+// changeRecMemo(12,[2,3,5]).then(res => console.log(res))
+console.log(changeRec(25,[2,5,7]))
 console.timeEnd('r')
-
