@@ -9,6 +9,7 @@ const { pipeline } = require('stream')
 
 const options = ['./files/lorem.txt' ]
 const less = spawn('less', options) 
+const fs = require('fs')
 
 /* beware , the key word 'yield' must be in a 'for of' loop 
    not a '.forEach(() => ...)' */
@@ -50,7 +51,6 @@ readS.pipe(transformStream).pipe(writeS)
 //  -----   from transform(Raw,basic way)   ---------
 // --------------------------------------------------
 const { Transform } = require('stream')
-const fs = require('fs')
 const util = require('util')
 
 function Upper(options) {
