@@ -22,7 +22,7 @@ function* iCombinations2rec(coins,change = [], shift = false){
   
   if(change.filter(x => x == coin).length < coins.filter(x => x == coin).length)
     yield* [...iCombinations2rec(coins, change.concat([coin]) ,true)]
-      
+  
   yield* [...iCombinations2rec(rest, change, false)]  
 }
 

@@ -3,3 +3,4 @@
 *./mailer_test/package-json.json*
 *node_modules/*
 *files/lorem*
+*.vscode*
