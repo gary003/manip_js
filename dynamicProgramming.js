@@ -163,4 +163,56 @@ const howSumTab = (targetNum, numbers, memo = {}) => {
   return res[targetNum]
 }
 
-console.log(howSumTab(17, [7, 3]))
+console.log(howSumTab(28, [7, 3]))
+
+/*******************************************/
+/*****  bestSum (shortest result)  *********/
+/*******************************************/
+
+const bestSumMemo = (targetSum, numbers, memo = {}) => {
+  if (targetSum in memo) return memo[targetSum]
+
+  if (targetSum == 0) return []
+  if (targetSum < 0) return null
+
+  let shortestCombination = null
+
+  for (let num of numbers) {
+    const bs = bestSumMemo(targetSum - num, numbers, memo)
+    if (bs !== null) {
+      const comb = [num, ...bs]
+      if (shortestCombination == null || comb.length < shortestCombination.length) {
+        shortestCombination = comb
+      }
+    }
+  }
+
+  memo[targetSum] = shortestCombination
+  return shortestCombination
+}
+
+console.log(bestSumMemo(8, [2, 5, 3]))
+console.log(bestSumMemo(100, [30, 25, 2]))
+
+const bestSumTab = (targetSum, numbers, memo = {}) => {
+  const result = Array(targetSum + 1).fill(null)
+  result[0] = []
+
+  for (let i = 0; i < targetSum; i += 1) {
+    if (result[i] !== null) {
+      for (let num of numbers) {
+        if (i + num <= targetSum) {
+          if (result[i + num] === null) result[i + num] = [...result[i], num]
+          else {
+            result[i + num] = result[i + num].length > [...result[i], num].length ? [...result[i], num] : result[i + num]
+          }
+        }
+      }
+    }
+  }
+
+  return result[targetSum]
+}
+
+console.log(bestSumTab(8, [2, 5, 3, 8]))
+console.log(bestSumTab(100, [30, 25, 2]))
