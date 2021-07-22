@@ -240,7 +240,7 @@ const canConstructMemo = (word, suffixes, memo = {}) => {
   return false
 }
 
-console.log(canConstructMemo("azerty", ["az", "ty", "ert", "ze", "y"]))
+console.log(canConstructMemo("azerty", ["a", "azer", "zer", "az", "er", "t", "ty", "y"]))
 console.log(canConstructMemo("skateboard", ["s", "boar", "ate", "te", "d", "ka", "e", "rd", "ska"]))
 console.log(canConstructMemo("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["eee", "eeeeee", "ee", "eeee", "e"]))
 
@@ -260,7 +260,7 @@ const canConstructTab = (word, suffixes) => {
   return table[word.length]
 }
 
-console.log(canConstructTab("azerty", ["az", "ty", "ert", "ze", "y"]))
+console.log(canConstructTab("azerty", ["a", "azer", "zer", "az", "er", "t", "ty", "y"]))
 console.log(canConstructTab("skateboard", ["s", "bo", "boar", "ate", "te", "d", "ka", "e", "rd", "ska"]))
 console.log(canConstructTab("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["eee", "eeeeee", "eeee", "e"]))
 
@@ -284,7 +284,7 @@ const countConstructTab = (word, suffixes) => {
   return table[word.length]
 }
 
-console.log(countConstructTab("azerty", ["az", "erty", "ert", "y", "azerty"]))
+console.log(countConstructTab("azerty", ["a", "azer", "zer", "az", "er", "t", "ty", "y"]))
 console.log(countConstructTab("skateboard", ["s", "bo", "boar", "ate", "te", "d", "ka", "e", "ard", "ska"]))
 console.log(countConstructTab("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["eee", "ee", "eeeeee", "eeee", "e", "f"]))
 
@@ -303,6 +303,80 @@ const countConstructMemo = (word, suffixes, memo = {}) => {
   return numOfWays
 }
 
-console.log(countConstructMemo("azerty", ["az", "erty", "ert", "y", "azerty"]))
+console.log(countConstructMemo("azerty", ["a", "azer", "zer", "az", "er", "t", "ty", "y"]))
 console.log(countConstructMemo("skateboard", ["s", "bo", "boar", "ate", "te", "d", "ka", "e", "ard", "ska"]))
 console.log(countConstructMemo("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ["eee", "ee", "eeeeee", "eeee", "e", "f"]))
+
+/*******************************************/
+/*****         allConstruct        *********/
+/*******************************************/
+
+// const allConstructTab = (word, suffixes) => {
+//   const table = Array(word.length + 1).fill(null)
+//   table[0] = []
+
+//   for (let i = 0; i < word.length; i += 1) {
+//     if (table[i] !== null) {
+//       const validSubSuffixes = suffixes.filter((suffix) => word.slice(i).indexOf(suffix) == 0)
+//       for (let validSuffix of validSubSuffixes) {
+//         if (table[validSuffix.length + i] == null && table[i].length == 0) {
+//           table[validSuffix.length + i] = table[i].concat(validSuffix)
+//         } else if (table[validSuffix.length + i] == null && table[i].length > 0) {
+//           for (let s of table[i]) {
+//             table[validSuffix.length + i] = table[i].map((val) => val + "." + validSuffix)
+//           }
+//         } else {
+//           for (let s of table[i]) {
+//             table[validSuffix.length + i].push(s + "." + validSuffix)
+//           }
+//         }
+//       }
+//     }
+//   }
+//   console.log(table)
+//   return table[word.length]
+// }
+
+const allConstructTab = (word, suffixes) => {
+  const table = Array(word.length + 1).fill([])
+  table[0] = [""]
+
+  for (let i = 0; i < word.length; i += 1) {
+    for (let suffix of suffixes) {
+      if (word.slice(i).indexOf(suffix) == 0) {
+        const newComb = table[i].map((val) => val + "." + suffix)
+        table[i + suffix.length] = [...table[i + suffix.length], ...newComb]
+      }
+    }
+  }
+
+  return table[word.length]
+}
+
+console.log(allConstructTab("azerty", ["a", "azer", "zer", "az", "er", "t", "ty", "y"]))
+console.log(allConstructTab("skateboard", ["s", "bo", "boar", "ate", "te", "d", "ka", "e", "ard", "ska"]))
+console.log(allConstructTab("abcdef", ["ab", "abc", "cd", "def", "abcd", "ef", "c"]))
+console.log(allConstructTab("eeeeef", ["eee", "ee", "eeeeee", "eeee", "e", "f"]))
+
+const allConstructMemo = (word, suffixes, memo = {}) => {
+  if (word in memo) return memo[word]
+  if (word == "") return [""]
+
+  let result = []
+
+  for (let suffix of suffixes) {
+    if (word.indexOf(suffix) == 0) {
+      const newWord = word.slice(suffix.length)
+      const ways = allConstructMemo(newWord, suffixes, memo).map((x) => suffix + "." + x)
+      result.push(...ways)
+    }
+  }
+
+  memo[word] = result
+  return result
+}
+
+console.log(allConstructMemo("azerty", ["a", "azer", "zer", "az", "er", "t", "ty", "y"]))
+console.log(allConstructMemo("skateboard", ["s", "bo", "boar", "ate", "te", "d", "ka", "e", "ard", "ska"]))
+console.log(allConstructMemo("abcdef", ["ab", "abc", "cd", "def", "abcd", "ef", "c"]))
+console.log(allConstructMemo("eeeeef", ["eee", "ee", "eeeeee", "eeee", "e", "f"]))
