@@ -136,7 +136,6 @@ const howSumMemo = (targetNum, numbers, memo = {}) => {
 
   for (let n of numbers) {
     newTarget = howSumMemo(targetNum - n, numbers, memo)
-    // console.log(typeof newTarget)
     if (newTarget !== null) {
       memo[targetNum] = [n, ...newTarget]
       return memo[targetNum]
