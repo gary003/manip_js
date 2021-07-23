@@ -34,7 +34,7 @@ const combinationsTab = (arr) => {
     table[i + 1] = table[i].map((val) => val + arr[i]).concat(table[i])
   }
 
-  return table
+  return table[arr.length]
 }
 
 console.time("combinationsTree")
