@@ -11,23 +11,43 @@ const changeRec = (amount, coins, change = [], res = []) => {
   return res
 }
 
-const change2Loop = (money, coins, res = [[[null]]].concat(Array(money).fill([]))) => {
+const changeTab = (money, coins) => {
+  const res = Array(money + 1).fill([])
+  res[0] = [[0]]
+
+  for (let iMoney = 0; iMoney <= money; iMoney++) {
+    if (res[iMoney].length > 0) {
+      for (let coin of coins) {
+        if (iMoney + coin <= money) {
+          const subChange = res[iMoney]
+          const newChg = subChange.map((x) => [...x, coin])
+          res[iMoney + coin] = [...res[iMoney + coin], ...newChg]
+        }
+      }
+    }
+  }
+
+  return res[money].map((change) => change.slice(1))
+}
+
+const changeTab2 = (money, coins) => {
+  const res = Array(money + 1).fill([])
+  res[0] = [[0]]
+
   for (let iCoin = 0; iCoin < coins.length; iCoin++)
     for (let iMoney = coins[iCoin]; iMoney <= money; iMoney++) {
-      //console.log(iMoney)
-      // this variable contains the new change for the current iMoney
-      let newChg = res[iMoney - coins[iCoin]]
-      //console.log(res)
+      // this variable contains the subProblem for the current iMoney
+      const subChange = res[iMoney - coins[iCoin]]
 
       /* we check the change value for the current change + the coin 
       and update the res (for each change previously calculated)
       We filter the original null value from the parameter(first value of res) */
-      newChg = newChg.map((x) => x.concat(coins[iCoin])).map((x) => x.filter((xx) => !!xx))
+      const newChg = subChange.map((x) => [...x, coins[iCoin]])
       // We add the new change to the res
-      res[iMoney] = res[iMoney].concat(newChg)
+      res[iMoney] = [...res[iMoney], ...newChg]
     }
 
-  return res[money]
+  return res[money].map((change) => change.slice(1))
 }
 
 const changeRecTer = (money, coins, indexCoin = 0, indexMoney = coins[0], result = [[[null]]].concat(Array(money).fill([]))) => {
@@ -59,28 +79,38 @@ const changeHF = (money, coins, change = [], res = []) => {
   return res
 }
 
-const countWaysToCount = (num, count = 1, memoize = {}) => {
+const countWaysToCountMemo = (num, count = 1, memoize = {}) => {
   if (num < 0) return 0
   if (`${num},${count}` in memoize) return memoize[`${num},${count}`]
   if (num == 0) return 1
   if (count > num) return 0
 
-  memoize[`${num},${count}`] = countWaysToCount(num, count + 1, memoize) + countWaysToCount(num - count, count, memoize)
+  memoize[`${num},${count}`] = countWaysToCountMemo(num, count + 1, memoize) + countWaysToCountMemo(num - count, count, memoize)
 
   return memoize[`${num},${count}`]
 }
 
 console.time("changeRec")
-// changeRecMemo(12,[2,3,5]).then(res => console.log(res))
-console.log(changeRec(12, [2, 5, 7]))
+// console.log(changeRec(120, [2, 5, 7]))
+const result1 = changeRec(50, [2, 5, 7])
 console.timeEnd("changeRec")
 
-console.time("change2Loop")
-// changeRecMemo(12,[2,3,5]).then(res => console.log(res))
-console.log(change2Loop(12, [2, 5, 7]))
-console.timeEnd("change2Loop")
+console.time("changeTab")
+// console.log(changeTab(120, [2, 5, 7]))
+const result2 = changeTab(50, [2, 5, 7])
+console.timeEnd("changeTab")
+
+console.time("changeTab2")
+// console.log(changeTab2(120, [2, 5, 7]))
+const result2Bis = changeTab2(50, [2, 5, 7])
+console.timeEnd("changeTab2")
 
 console.time("changeHF")
-// changeRecMemo(12,[2,3,5]).then(res => console.log(res))
-console.log(changeHF(12, [2, 5, 7]))
+// console.log(changeHF(120, [2, 5, 7]))
+const result3 = changeHF(50, [2, 5, 7])
 console.timeEnd("changeHF")
+
+console.time("changeRecTer")
+// console.log(changeRecTer(120, [2, 5, 7]))
+const result4 = changeRecTer(50, [2, 5, 7])
+console.timeEnd("changeRecTer")
