@@ -49,5 +49,5 @@ console.timeEnd("combinationsTreeDP")
 
 console.time("combinationsTab")
 const comb3 = combinationsTab(["A", "B", "C", "D", "E", "F", "G"])
-console.log(comb3)
+// console.log(comb3)
 console.timeEnd("combinationsTab")
