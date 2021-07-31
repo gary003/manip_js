@@ -34,7 +34,18 @@ function* iCombinations1rec(arr, k, change = Array.from(arr)) {
     }
 }
 
-function* iCombinationsTab(arr) {
+const iCombinationsTab = function* (arr) {
+  const table = Array(arr.length + 1)
+  table[0] = [[]]
+
+  for (let i = 0; i < arr.length; i += 1) {
+    const subPlusNewCard = table[i].map((x) => [...x, arr[i]])
+    table[i + 1] = [...subPlusNewCard, ...table[i]]
+    yield* subPlusNewCard
+  }
+}
+
+const iCombinationsTabAsync = async function* (arr) {
   const table = Array(arr.length + 1)
   table[0] = [[]]
 
@@ -64,3 +75,10 @@ console.time("iCombinationsTab")
 const comb4 = [...iCombinationsTab(["♣A", "♦2", "♥K", "♠Q", "♠9"])]
 // console.log(comb4)
 console.timeEnd("iCombinationsTab")
+
+console.time("iCombinationsTabAsync")
+const asyncCombis = iCombinationsTabAsync(["♣A", "♦2", "♥K", "♠Q", "♠9"])
+for await (let combi of asyncCombis) {
+  // console.log(combi)
+}
+console.timeEnd("iCombinationsTabAsync")
