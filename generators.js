@@ -19,10 +19,17 @@ async function example() {
 
 example()
 
+const hello = () => ({ salutation: "Hello" })
+
 const gen = function* () {
   yield 0
   yield [1, 2, 3]
   yield* [1, 2, 3]
+  yield hello().salutation
 }
 
 console.log(...gen())
+
+const sizes2 = ["tiny", "little", "medium", "big", "huge"][Symbol.iterator]()
+
+console.log(sizes2.next())
