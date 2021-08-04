@@ -46,14 +46,30 @@ const combinationsTab2 = (arr) => {
   )[arr.length]
 }
 
+const combinationsRedableHO = (arr) => {
+  const table = Array(arr.length).fill(null)
+  table[0] = [""]
+
+  const resultTable = table.reduce(
+    (acc, val, i) => {
+      const newCombi = acc[i].map((currAcc) => currAcc + arr[i])
+      const oldCombi = acc[i]
+      const nextSetOfCombi = newCombi.concat(oldCombi)
+      return acc.concat([nextSetOfCombi])
+    },
+    [[""]]
+  )
+  return resultTable[arr.length]
+}
+
 console.time("combinationsTree")
-const comb2 = combinationsTree(["A", "B", "C", "D", "E", "F", "G"])
-// console.log(JSON.stringify(comb2, null, 2))
+const comb1 = combinationsTree(["A", "B", "C", "D", "E", "F", "G"])
+// console.log(comb1)
 console.timeEnd("combinationsTree")
 
 console.time("combinationsTreeDP")
-const comb1 = combinationsTreeDP(["A", "B", "C", "D", "E", "F", "G"])
-// console.log(JSON.stringify(comb1, null, 2))
+const comb2 = combinationsTreeDP(["A", "B", "C", "D", "E", "F", "G"])
+// console.log((comb2)
 console.timeEnd("combinationsTreeDP")
 
 console.time("combinationsTab")
@@ -65,3 +81,8 @@ console.time("combinationsTab2")
 const comb4 = combinationsTab2(["A", "B", "C", "D", "E", "F", "G"])
 // console.log(comb4)
 console.timeEnd("combinationsTab2")
+
+console.time("combinationsRedableHO")
+const comb5 = combinationsRedableHO(["A", "B", "C", "D", "E", "F", "G"])
+// console.log(comb5)
+console.timeEnd("combinationsRedableHO")
