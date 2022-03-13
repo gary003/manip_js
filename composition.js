@@ -3,19 +3,19 @@ const double = (x) => x + x
 const triple = (x) => x * 3
 const quadra = (x) => x * 4
 
-const compo =
+const compose =
   (...functions) =>
-  (input) => {
-    return functions.reduce((acc, f) => {
-      return (acc = f(acc))
-    }, input)
+  (...values) => {
+    return functions.reduceRight((acc, func) => {
+      return [func(...acc)]
+    }, values)[0]
   }
 
-const mul12 = compo(quadra, triple)
-const mul18 = compo(double, triple, triple)
+const mul8 = compose(quadra, double)
+const mul27 = compose(triple, triple, triple)
 
-console.log(mul12(3))
-console.log(mul18(3))
+console.log(mul8(3))
+console.log(mul27(3))
 
 // composition Promise
 const doubleP = async (x) => x + x
